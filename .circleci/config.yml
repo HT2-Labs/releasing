@@ -33,6 +33,6 @@ jobs:
       - deploy:
           name: Create Release
           command: |
-            if [ "${CIRCLE_TAG}" -ne "" ]; then
+            if [ "${CIRCLE_TAG}" != "" ]; then
               node ./src/createRelease/index.js;
             fi
