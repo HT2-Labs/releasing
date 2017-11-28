@@ -5,8 +5,12 @@ const EQ = 0;
 const BEFORE = -1;
 const AFTER = 1;
 
-const splitSemver = (versionString) => {
-  return versionNumbersRegex.exec(versionString)[0].split('.').map((versionNumber) => {
+const splitSemver = (fullVersionString) => {
+  const result = versionNumbersRegex.exec(fullVersionString);
+  if (result === null) {
+    return [];
+  }
+  return result[0].split('.').map((versionNumber) => {
     return parseInt(versionNumber, 0);
   });
 };
