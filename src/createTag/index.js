@@ -1,6 +1,9 @@
 const createTag = require('./createTag');
 
-createTag().then(() => {
+const user = process.env.GH_USER;
+const pass = process.env.GH_PASS;
+
+createTag({ user, pass }).then(() => {
   process.exit(0);
 }).catch((err) => {
   console.error(err);

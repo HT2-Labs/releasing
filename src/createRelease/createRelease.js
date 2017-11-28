@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
+const getGithubRepo = require('../utils/getGithubRepo');
 const getChangeLog = require('./getChangeLog');
-const getGithubRepo = require('./getGithubRepo');
 
 const createRelease = async ({ githubToken }) => {
   const { version, notes } = await getChangeLog();
