@@ -14,7 +14,7 @@ const getLevelFromMessage = (message) => {
 
 const pushTag = (tag) => {
   return new Promise((resolve, reject) => {
-    git.addTag(`v${nextRelease}`).pushTags((err) => {
+    git.addTag(`v${tag}`).pushTags((err) => {
       if (err) return reject(err);
       return resolve();
     });
