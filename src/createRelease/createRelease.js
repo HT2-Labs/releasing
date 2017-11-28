@@ -5,6 +5,7 @@ const getGithubRepo = require('./getGithubRepo');
 const createRelease = async ({ githubToken }) => {
   const { version, notes } = await getChangeLog();
   const { owner, repo } = await getGithubRepo();
+  console.log(`https://api.github.com/repos/${owner}/${repo}/releases`);
   const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases`, {
     method: 'POST',
     headers: {
