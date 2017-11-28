@@ -1,0 +1,17 @@
+{
+  "name": "@ht2-labs/releasing",
+  "version": "0.0.0-development",
+  "description": "A repository to help with releases",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "node-fetch": "^1.7.3",
+    "semver": "^5.4.1",
+    "simple-git": "^1.82.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "HT2-Labs",
+  "license": "GPL-3.0"
+}
