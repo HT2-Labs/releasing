@@ -15,7 +15,7 @@ const getLevelFromMessage = (message) => {
 
 const pushTag = async ({ tag, user, pass }) => {
   await git.addTag(`v${tag}`);
-  await git.pushTags(remote);
+  await git.pushTags();
 };
 
 const createTag = async ({ user, pass }) => {
