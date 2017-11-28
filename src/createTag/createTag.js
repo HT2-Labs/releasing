@@ -16,12 +16,7 @@ const getLevelFromMessage = (message) => {
 const pushTag = async ({ tag, user, pass }) => {
   const { owner, repo } = await getGithubRepo();
   const remote = `https://${user}:${pass}@${owner}/${repo}.git`;
-  return new Promise((resolve, reject) => {
-    git.addTag(`v${tag}`).pushTags(remote, (err) => {
-      if (err) return reject(err);
-      return resolve();
-    });
-  })
+  await git.addTag(`v${tag}`).pushTags(remote);
 };
 
 const createTag = async ({ user, pass }) => {
