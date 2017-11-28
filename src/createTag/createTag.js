@@ -14,8 +14,6 @@ const getLevelFromMessage = (message) => {
 };
 
 const pushTag = async ({ tag, user, pass }) => {
-  const { owner, repo } = await getGithubRepo();
-  const remote = `https://${user}:${pass}@${owner}/${repo}.git`;
   await git.addTag(`v${tag}`);
   await git.pushTags(remote);
 };
