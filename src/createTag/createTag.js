@@ -13,12 +13,12 @@ const getLevelFromMessage = (message) => {
   return 0;
 };
 
-const pushTag = async ({ tag, user, pass }) => {
+const pushTag = async ({ tag }) => {
   await git.addTag(`v${tag}`);
   await git.pushTags();
 };
 
-const createTag = async ({ user, pass }) => {
+const createTag = async () => {
   const { latest } = await getTags();
   const logLines = await getLog({ from: latest, to: 'HEAD' });
   const messages = logLines.map(({ message }) => message);
@@ -29,10 +29,10 @@ const createTag = async ({ user, pass }) => {
   if (level > 0) {
     const nextRelease = semver.inc(latest, levels[level]);
     const tag = `v${nextRelease}`;
-    await pushTag({ tag, user, pass });
-    console.log(`Released v${nextRelease}`);
+    await pushTag({ tag });
+    console.log(`Created tag ${tag}`);
   } else {
-    console.log('No release');
+    console.log('No tag');
   }
 };
 
