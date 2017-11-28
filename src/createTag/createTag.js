@@ -14,7 +14,7 @@ const getLevelFromMessage = (message) => {
 };
 
 const pushTag = async ({ tag }) => {
-  await git.addTag(`v${tag}`);
+  await git.addTag(tag);
   await git.pushTags();
 };
 
@@ -27,7 +27,7 @@ const createTag = async () => {
     return Math.max(result, messageLevel);
   }, 0);
   if (level > 0) {
-    const nextRelease = semver.inc(latest, levels[level]);
+    const nextRelease = latest === undefined ? '1.0.0' : semver.inc(latest, levels[level]);
     const tag = `v${nextRelease}`;
     await pushTag({ tag });
     console.log(`Created tag ${tag}`);
