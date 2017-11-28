@@ -25,18 +25,14 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package-lock.json" }}
       - deploy:
-          filters:
-            tags:
-              ignore: /.*/
-            branches:
-              only: /^master$/
           name: Create Tag
-          command: node ./src/createTag/index.js
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              node ./src/createTag/index.js;
+            fi
       - deploy:
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              ignore: /.*/
           name: Create Release
-          command: node ./src/createRelease/index.js
+          command: |
+            if [ "${CIRCLE_TAG}" -ne "" ]; then
+              node ./src/createRelease/index.js;
+            fi
