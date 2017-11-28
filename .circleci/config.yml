@@ -2,14 +2,11 @@ version: 2
 
 jobs:
   build:
-    filters:
-      tags:
-        only: /.*/
-    docker:
-      - image: node:8.8.0
+    working_directory: ~/repo
     environment:
       - NPM_CONFIG_LOGLEVEL: warn
-    working_directory: ~/repo
+    docker:
+      - image: node:8.8.0
     steps:
       - checkout
       - setup_remote_docker:
@@ -24,19 +21,38 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package-lock.json" }}
-      - deploy:
-          filters:
-            tags:
-              ignore: /.*/
-            branches:
-              only: /^master$/
+  create-tag:
+    working_directory: ~/repo
+    docker:
+      - image: node:8.8.0
+    steps:
+      - run:
           name: Create Tag
           command: node ./src/createTag/index.js
-      - deploy:
+  create-release:
+    working_directory: ~/repo
+    docker:
+      - image: node:8.8.0
+    steps:
+      - run:
+          name: Create Release
+          command: node ./src/createRelease/index.js
+    
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+          filters:
+          tags:
+            only: /.*/
+      - create-tag
+          filters:
+            branches:
+              only: master
+      - create-release
           filters:
             tags:
               only: /.*/
             branches:
               ignore: /.*/
-          name: Create Release
-          command: node ./src/createRelease/index.js
