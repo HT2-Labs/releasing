@@ -1,12 +1,8 @@
-const git = require('simple-git')('.');
+const git = require('simple-git/promise')('.');
 
-const getLog = (opts) => {
-  return new Promise((resolve, reject) => {
-    git.log(opts, (err, { all }) => {
-      if (err) return reject(err);
-      return resolve(all);
-    });
-  });
+const getLog = async (opts) => {
+  const { all } = await git.log(opts);
+  return all;
 };
 
 module.exports = getLog;

@@ -1,12 +1,7 @@
 const git = require('simple-git')('.');
 
-const getTags = () => {
-  return new Promise((resolve, reject) => {
-    git.pull().tags((err, { latest, all }) => {
-      if (err) return reject(err);
-      return resolve({ latest, all });
-    });
-  });
+const getTags = async () => {
+  return await git.pull().tags();
 };
 
 module.exports = getTags;

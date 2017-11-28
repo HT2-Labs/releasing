@@ -1,4 +1,4 @@
-const git = require('simple-git')(__dirname);
+const git = require('simple-git/promise')(__dirname);
 const semver = require('semver');
 const getTags = require('../utils/getTags');
 const getLog = require('../utils/getLog');
@@ -12,13 +12,8 @@ const getLevelFromMessage = (message) => {
   return 0;
 };
 
-const pushTag = (tag) => {
-  return new Promise((resolve, reject) => {
-    git.addTag(`v${tag}`).pushTags((err) => {
-      if (err) return reject(err);
-      return resolve();
-    });
-  });
+const pushTag = async (tag) => {
+  await git.addTag(`v${tag}`).pushTags();
 };
 
 const createTag = async () => {
