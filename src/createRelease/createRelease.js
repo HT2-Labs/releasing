@@ -25,7 +25,8 @@ const createRelease = async ({ githubToken }) => {
   if (res.status === 201) {
     console.log('Release created');
   }
-  throw new Error('Unexpected response from Github');
+  const text = await res.text();
+  throw new Error(`Unexpected response ${res.status} from Github. ${text}`);
 };
 
 module.exports = createRelease;
