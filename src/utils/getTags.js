@@ -1,7 +1,8 @@
 const git = require('simple-git/promise')('.');
 
 const getTags = async () => {
-  return await git.pull().tags();
+  await git.pull();
+  return git.tags();
 };
 
 module.exports = getTags;
