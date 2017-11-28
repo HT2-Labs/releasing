@@ -83,7 +83,7 @@ const getChangeLog = async () => {
   const feats = commits.filter(({ type }) => type === 'feat');
   const today = (new Date()).toISOString().slice(0, 10);
   const notes = [
-    `# ${latest} (${today})\nChanges since ${previousVersion} are described below.`,
+    `# ${latest} (${today})`,
     ...displaySection('Features', feats),
     ...displaySection('Performance Improvements', perfs),
     ...displaySection('Bug Fixes', fixes),

@@ -32,6 +32,9 @@ const getPreviousVersion = (allVersions, currentVersion) => {
     return compareSemver(sortedVersion, splitCurrentVersion) !== AFTER;
   });
   const previousVersion = first(previousVersions);
+  if (previousVersion === undefined) {
+    return undefined;
+  }
   const previousVersionString = `v${previousVersion.join('.')}`;
   return previousVersionString;
 };
