@@ -2,9 +2,8 @@ version: 2
 
 jobs:
   build:
-    filters:
-      tags:
-        only: /.*/
+    tags:
+      only: /.*/
     docker:
       - image: node:8.8.0
     environment:
