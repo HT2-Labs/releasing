@@ -32,6 +32,13 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package-lock.json" }}
+      - run:
+          name: Installing Dependencies
+          command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
       - run: node ./src/createTag/index.js;
   create_release:
     docker:
@@ -44,6 +51,13 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package-lock.json" }}
+      - run:
+          name: Installing Dependencies
+          command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
       - run: node ./src/createRelease/index.js;
 
 workflows:
