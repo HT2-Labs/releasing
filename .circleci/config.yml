@@ -26,13 +26,13 @@ jobs:
       - image: node:8.8.0
     working_directory: ~/repo
     steps:
-      run: node ./src/createTag/index.js;
+      - run: node ./src/createTag/index.js;
   create_release:
     docker:
       - image: node:8.8.0
     working_directory: ~/repo
     steps:
-      run: node ./src/createRelease/index.js;
+      - run: node ./src/createRelease/index.js;
 
 workflows:
   version: 2
