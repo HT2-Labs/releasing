@@ -38,21 +38,21 @@ workflows:
   version: 2
   build_deploy:
     jobs:
-      build:
-        filters:
-          tags:
-            only: /.*/
-      create_tag:
-        requires:
-          - build
-        filters:
-          branch:
-            only: master
-      create_release:
-        requires:
-          - build
-        filters:
-          tags:
-            only: /.*/
-          branches:
-            ignore: /.*/
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - create_tag:
+          requires:
+            - build
+          filters:
+            branch:
+              only: master
+      - create_release:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
