@@ -46,7 +46,7 @@ workflows:
           requires:
             - build
           filters:
-            branch:
+            branches:
               only: master
       - create_release:
           requires:
